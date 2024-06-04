@@ -12,23 +12,26 @@ export async function loader(props: null, req: Request) {
         });
     });
 
-    const body = await req.text();
+    //const body = await req.text();
 
     const data = {
         headers,
-        body,
+        //body,
+        url: req.url,
     };
 
     console.log("Request", req);
-    console.log("Data", data);
 
     return data;
 }
 
+
 export default function Debugger({
     headers,
-    body,
+    url,
 }: SectionProps<typeof loader>) {
+  console.log("Headers", headers);
+
     return (
         <div class="w-full flex flex-col items-center gap-9 p-10">
             <h1 class="flex items-center gap-2 justify-center w-full text-xl font-semibold">
@@ -42,8 +45,8 @@ export default function Debugger({
                 ))}
             </div>
             <div class="flex flex-col gap-4">
-                <h4 class="font-semibold">Body</h4>
-                {body}
+                <h4 class="font-semibold">URL</h4>
+                <p>{url}</p>
             </div>
         </div>
     );
